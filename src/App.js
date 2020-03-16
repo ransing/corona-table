@@ -6,6 +6,7 @@ import 'react-table/react-table.css';
 import './tableStyles.css'
 import { red } from 'color-name';
 
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -30,10 +31,23 @@ class App extends Component {
     return ((a/b)*100).toFixed(2)
   } 
 
+ 
+
   render(){
 
-    const province = ('provinceState' ? 'countryRegion' : 'provinceState')
+    const provinceCountry = (props) => {
+      const countryRegion = 'countryRegion'
+      if (props.provinceState === null){
+              return "Country"
+            }
+            else { 
+              return "Province"
+          }
 
+    }
+
+    // const province = ('provinceState' ? 'countryRegion' : 'provinceState')
+    //                  if ('provinceState')
 
     const columns = [
       {
@@ -41,17 +55,20 @@ class App extends Component {
         accessor: 'countryRegion',
         maxWidth: 250,
         style:{
-          'text-align': 'center'
+          'text-align': 'center',
+          'text-size': '13px',
+          'minWidth': 150,
         }
       },
       {
         id: Math.random(),
         Header: 'Province',
         maxWidth:200,
-        accessor: province,
-      //   accessor: d => {
+        accessor: 'provinceState',
+      //   accessor: (props) => {
+      //     console.log(props.provinceState)
       //     var obj = {accessor: 'provinceState'}
-      //     if ('provinceState' === null){
+      //     if (props.provinceState === null){
       //       return 'countryRegion'
       //     }
       //     else { return 'provinceState'
@@ -93,9 +110,18 @@ class App extends Component {
         }
       },
       {
+        id: Math.random(),
+        Header: 'Region/Country',
+        accessor: provinceCountry,
+        maxWidth: 148,
+        style:{
+          'text-align': 'center'
+        }
+      },
+      {
         Header: 'Confirmed',
         accessor: 'confirmed',
-        maxWidth: 150,
+        maxWidth: 140,
         style:{
           'text-align': 'center'
         }
@@ -103,7 +129,7 @@ class App extends Component {
       {
         Header: 'Deaths',
         accessor: 'deaths',
-        maxWidth: 150,
+        maxWidth: 120,
         backgroundColor: red,
         getProps: (state, rowInfo) => {  //?https://stackoverflow.com/questions/12548857/multiple-conditions-in-ternary-conditional-operator
             if (rowInfo && rowInfo.row) {
@@ -132,9 +158,17 @@ class App extends Component {
         style:{
           'text-align': 'center'
         },
-        maxWidth:150,
+        maxWidth:148,
         accessor: row => 
         this.percentage(row.deaths, row.confirmed)
+      },
+      {
+        Header: 'Recovered',
+        accessor: 'recovered',
+        maxWidth: 150,
+        style:{
+          'text-align': 'center'
+        }
       }
     ]
 
@@ -154,7 +188,8 @@ class App extends Component {
           defaultPageSize= {2}
           className="-striped -highlight"
           style={{
-            'height':'950px'
+            'height':'950px',
+            'border':'2px solid black',
           }}
           >
         </ReactTable>
