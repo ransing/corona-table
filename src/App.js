@@ -5,6 +5,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import './tableStyles.css'
 import { red } from 'color-name';
+import GlobalSearchComponent from './components/GlobalSearchComponent';
 
 
 class App extends Component {
@@ -12,8 +13,11 @@ class App extends Component {
     super(props);
     this.state = {
       cases: [],
-      country: "country"
+      country: "country",
+      filtered: [],
+      filterAll: '',
     }
+    this.filterAll = this.filterAll.bind(this);
   }
   
   componentDidMount(){
@@ -30,6 +34,34 @@ class App extends Component {
   percentage = (a,b) => {
     return ((a/b)*100).toFixed(2)
   } 
+
+  filterAll(e) {
+    const { value } = e.target;
+    const filterAll = value;
+    const filtered = [{ id: 'all', value: filterAll }];
+    // NOTE: this completely clears any COLUMN filters
+    this.setState({ filterAll, filtered });
+  }
+
+  onFilteredChange(filtered) {
+    // console.log('filtered:',filtered);
+    // const { sortedData } = this.reactTable.getResolvedState();
+    // console.log('sortedData:', sortedData);
+
+    // extra check for the "filterAll"
+    if (filtered.length > 1 && this.state.filterAll.length) {
+      // NOTE: this removes any FILTER ALL filter
+      const filterAll = '';
+      this.setState({ filtered: filtered.filter((item) => item.id != 'all'), filterAll })
+    }
+    else
+      this.setState({ filtered });
+  }
+
+  handleSetData = data => {
+    console.log(data);
+    this.setState({ cases: data });
+  };
 
  
 
@@ -53,17 +85,18 @@ class App extends Component {
       {
         Header: 'Country',
         accessor: 'countryRegion',
+        minWidth:150,
         maxWidth: 250,
         style:{
           'text-align': 'center',
-          'text-size': '13px',
+          'text-size': '12px',
           'minWidth': 150,
         }
       },
       {
         id: Math.random(),
         Header: 'Province',
-        maxWidth:200,
+        maxWidth:210,
         accessor: 'provinceState',
       //   accessor: (props) => {
       //     console.log(props.provinceState)
@@ -111,7 +144,7 @@ class App extends Component {
       },
       {
         id: Math.random(),
-        Header: 'Region/Country',
+        Header: 'Region/ Country',
         accessor: provinceCountry,
         maxWidth: 148,
         style:{
@@ -122,6 +155,28 @@ class App extends Component {
         Header: 'Confirmed',
         accessor: 'confirmed',
         maxWidth: 140,
+        getProps: (state, rowInfo) => {  //?https://stackoverflow.com/questions/12548857/multiple-conditions-in-ternary-conditional-operator
+          if (rowInfo && rowInfo.row) {
+            return {
+              style: {
+                background:
+                  (rowInfo.row.confirmed > 0 && rowInfo.row.confirmed < 100) ? "#f3e2c8": 
+                  (rowInfo.row.confirmed > 90 && rowInfo.row.confirmed < 1000) ? "#f3d2a1": 
+                  (rowInfo.row.confirmed > 990 && rowInfo.row.confirmed < 2000) ? "#f1c17a": 
+                  (rowInfo.row.confirmed > 1990 && rowInfo.row.confirmed < 3000) ? "#f17f3a": 
+                  (rowInfo.row.confirmed > 2990 && rowInfo.row.confirmed < 4000) ? "#f2b355":
+                  (rowInfo.row.confirmed > 3999 && rowInfo.row.confirmed < 10000) ? "#f4a225":
+                  (rowInfo.row.confirmed > 10000 && rowInfo.row.confirmed < 20000) ? "#e17c31":
+                  (rowInfo.row.confirmed > 20000 && rowInfo.row.confirmed < 39990) ? "#d76450":
+                  (rowInfo.row.confirmed > 39990) ? "#ca5271":
+                  null,
+                  'text-align': 'center'
+              }
+            };
+          } else {
+            return {};
+          }
+        },
         style:{
           'text-align': 'center'
         }
@@ -156,7 +211,9 @@ class App extends Component {
         Header: 'Case Fatality',
         accessor: 'active',
         style:{
-          'text-align': 'center'
+          'text-align': 'center',
+          'whiteSpace': 'unset',
+          'background': '#e6bdc8',
         },
         maxWidth:148,
         accessor: row => 
@@ -167,7 +224,8 @@ class App extends Component {
         accessor: 'recovered',
         maxWidth: 150,
         style:{
-          'text-align': 'center'
+          'text-align': 'center',
+          'background': '#d5ebd4',
         }
       }
     ]
@@ -179,6 +237,13 @@ class App extends Component {
     }}
     >
       Hello
+      {/* Filter All: <input value={this.state.filterAll} onChange={this.filterAll} /> */}
+
+      <GlobalSearchComponent
+          data={this.state.cases}
+          handleSetData={this.handleSetData}
+        />
+
         <ReactTable
           columns={columns}
           data={this.state.cases}
