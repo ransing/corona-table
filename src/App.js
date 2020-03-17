@@ -94,6 +94,7 @@ class App extends Component {
           'text-align': 'center',
           'text-size': '12px',
           'minWidth': 150,
+          'background':'#e2e3a1'
         }
       },
       {
@@ -101,46 +102,9 @@ class App extends Component {
         Header: 'Province',
         maxWidth:210,
         accessor: 'provinceState',
-      //   accessor: (props) => {
-      //     console.log(props.provinceState)
-      //     var obj = {accessor: 'provinceState'}
-      //     if (props.provinceState === null){
-      //       return 'countryRegion'
-      //     }
-      //     else { return 'provinceState'
-      //   }
-      // },
+      
         // getProps: (state, rowInfo) => {  //?https://stackoverflow.com/questions/12548857/multiple-conditions-in-ternary-conditional-operator
-        //   if (rowInfo) {
-        //     return {
-        //       style: {
-        //         background: 'blue',
-        //           // (rowInfo.row.provinceState === null ) ? "blue": 
-        //           // null,
-        //           'text-align': 'center'
-        //       }
-        //     };
-        //   } else {
-        //     return {};
-        //   }
-        // },
         
-        
-        // getProps: (state, rowInfo,  props) => {
-        //   // if (rowInfo) {
-        //   // console.log(state.columns[1])
-        //   console.log(rowInfo)
-        //   var province = {accessor: 'provinceState'}
-        //   var country = {accessor: 'countryRegion'}
-          
-        //   // }
-        //   // if(props === null ) {
-        //   //  return country
-        //   // } 
-        //   // else  {
-        //     return province
-        //   // }
-        // },
         style:{
           'text-align': 'center'
         }
@@ -151,7 +115,8 @@ class App extends Component {
         accessor: provinceCountry,
         maxWidth: 148,
         style:{
-          'text-align': 'center'
+          'text-align': 'center',
+          'background': '#b6c9c0'
         }
       },
       {
