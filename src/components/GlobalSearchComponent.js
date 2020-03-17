@@ -1,5 +1,9 @@
 import React from "react";
-import { Input } from "semantic-ui-react";
+// import { Input, Form } from "semantic-ui-react";
+import '../tableStyles.css'
+import { Input } from 'antd';
+import 'antd/dist/antd.css';
+import { Popover, Button } from 'antd';
 
 export default class GlobalSearchComponent extends React.Component {
   constructor(props) {
@@ -53,19 +57,59 @@ export default class GlobalSearchComponent extends React.Component {
   };
 
   render() {
+
       console.log(this.props.data[10]);
+      const content = (
+        <div>
+          <p style={{'font-size':'20px'}}>Click the headings in the top row to sort</p>
+        </div>
+    )
+
+
     return (
       <>
-        <br />
-        <Input
-          size="large"
-          name="searchInput"
-          value={this.state.searchInput || ""}
-          onChange={this.handleChange}
-          label="Search"
-        />
-        <br />
-        <br />
+        
+        <div 
+        style={{
+            'width':' 900px',
+            'textAlign': "center",
+            'margin':'0 auto',
+            'marginTop':'20px'
+        }}>
+            <h1 style={{'color':'white'}}>Coronavirus Numbers Around the World</h1>
+            <div
+            Style={{
+                "marginTop":"20px",
+            }}>
+            <Input 
+            id="inputID"
+            class="inputSearch"
+            icon='search'
+            // action='search'
+            // size='big'
+            type="text"
+            size="large"
+            name="searchInput"
+            placeholder="Search Country"
+            value={this.state.searchInput || ""}
+            onChange={this.handleChange}
+            label="Search Country"
+            style={{
+                'margin':'auto',
+                'text-align': 'center',
+                'width':'300px',
+                'backgroundColor':'#C9CCCE'
+            }}
+            />
+            </div>
+            <br />
+            <div>
+                <Popover content={content}  placement="right">
+                    {/* <Button type="primary">Hover me</Button> */}
+                    <Button type="primary" >Sort</Button>  
+                </Popover>
+            </div>
+        </div>
       </>
     );
   }

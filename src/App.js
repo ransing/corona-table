@@ -4,8 +4,11 @@ import './App.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import './tableStyles.css'
-import { red } from 'color-name';
+import { red, black } from 'color-name';
 import GlobalSearchComponent from './components/GlobalSearchComponent';
+import HoverInfo from './components/hoverInfo'
+import hoverInfo from './components/hoverInfo';
+import { Link } from 'react';
 
 
 class App extends Component {
@@ -85,7 +88,7 @@ class App extends Component {
       {
         Header: 'Country',
         accessor: 'countryRegion',
-        minWidth:150,
+        minWidth: 150,
         maxWidth: 250,
         style:{
           'text-align': 'center',
@@ -233,10 +236,11 @@ class App extends Component {
   return (
     <div style={{
       'height':'200px',
-      'width':'1000px'
+      'width':'1000px',
+      'backgroundColor': 'rgb(34, 29, 29)',
     }}
     >
-      Hello
+      {/* <HoverInfo /> */}
       {/* Filter All: <input value={this.state.filterAll} onChange={this.filterAll} /> */}
 
       <GlobalSearchComponent
@@ -255,9 +259,16 @@ class App extends Component {
           style={{
             'height':'950px',
             'border':'2px solid black',
+            'backgroundColor':'#91c0b7',
           }}
           >
         </ReactTable>
+        <div style={{"textAlign":"center", "marginBottom":"20px"}}>
+          <p>
+        <a  target="_blank" href="https://medium.com/@ransing/the-competency-of-react-tables-in-exhibiting-data-1bb35bec7c79"> Source Code </a>
+          </p>
+        <a  target="_blank" href="https://viraj.info"> Get in Touch? </a>
+        </div>
     </div>
   );
   }

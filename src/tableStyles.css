@@ -109,6 +109,7 @@
   .ReactTable .rt-thead .rt-td.-cursor-pointer {
     cursor: pointer;
     border:1px solid black;
+    /* flex:186 */
 /*     
     flex: 149.996 0 auto !important;
     width: 14.996px !important;
@@ -123,6 +124,9 @@
   .ReactTable .rt-thead .rt-resizable-header {
     overflow: visible;
     width: auto;
+    /* flex: 100 0 auto !important;
+    width: 800px !impornat;  */
+    max-width: 210px;
   }
   
   .ReactTable .rt-thead .rt-resizable-header:last-child {
@@ -285,8 +289,8 @@
     display: inline-block;
     position: absolute;
     width: 10px;
-    top: 0;
-    bottom: 0;
+    top: 4;
+    bottom: 4;
     right: -18px;
     cursor: col-resize;
     z-index: 10
@@ -349,7 +353,7 @@
     padding: 6px;
     font-size: 1em;
     color: rgba(0, 0, 0, 0.6);
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(65, 56, 112, 0.5);
     -webkit-transition: all .1s ease;
     transition: all .1s ease;
     cursor: pointer;
@@ -453,7 +457,8 @@
     width: 100%;
     top: 50%;
     left: 0;
-    font-size: 18px;
+    font-size: 18px !important;
+    /* font-weight: bold !important; */
     color: rgba(0, 0, 0, 0.6);
     -webkit-transform: translateY(-52%);
     transform: translateY(-52%);
@@ -548,7 +553,7 @@
   
 
   .ReactTable .rt-resizable-header {
-    padding: 7px 23px !important;
+    padding: 8px 23px !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     background-color: aqua;
@@ -560,35 +565,46 @@
 }
  
 .ReactTable .rt-resizer:before {
-    display: inline-block;
-    position: absolute;
-    right: 25px;
-    top: 3px;
-    height: 18px;
-    width: 18px;
-    color: transparent;
+    display: inline-block !important;
+    position: absolute !important;
+    right: 2px !important;
+    top: 3px !important;
+    height: 10px !important;
+    width: 10px !important;
+    padding: 2px !important;
+    color: transparent !important;
     content: '.';
-    background-size: 18px 18px;
+    background-size: 4px 5px;
     background-repeat: no-repeat; 
     opacity: 0.87;
     
 }
 
 .ReactTable  .rt-resizable-header-content:after {
-    position: absolute;
-    right: 8px;
-    top: 3px;
-    height: 18px;
-    width: 18px;
-    z-index: 120;
-    color: transparent;
-    content: '.';
+    position: absolute !important;
+    right: 8px !important;
+    top: 3px !important;
+    height: 38px !important;
+    width: 18px !important;
+    z-index: 120 !important;
+    color: transparent !important;
+    content: '.' !important;
 }
 
 .ReactTable .rt-th.-sort-asc .rt-resizer:before {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTAgMTVWNmw0IDQgMS0xLTYtNi02IDYgMSAxIDQtNHY5eiIgZmlsbD0iIzMzMyIvPjwvc3ZnPg==);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTAgMTVWNmw0IDQgMS0xLTYtNi02IDYgMSAxIDQtNHY5eiIgZmlsbD0iIzMzMyIvPjwvc3ZnPg==) !important;
 }
 
 .ReactTable .rt-th.-sort-desc .rt-resizer:before {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAzdjkuMTNMNCA4IDMgOWw2IDYgNi02LTEtMS00IDQuMTNWM3oiIGZpbGw9IiMzMzMiLz48L3N2Zz4=);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAzdjkuMTNMNCA4IDMgOWw2IDYgNi02LTEtMS00IDQuMTNWM3oiIGZpbGw9IiMzMzMiLz48L3N2Zz4=) !important;
 }
+
+#inputID::placeholder {
+  color: #ab6250 !important;
+  opacity:1;
+} 
+
+
+
+
+
